@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Plano de Ativação da Prosperidade — Variação 1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1637911654178803');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1637911654178803&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<div class="progress-track"><div class="progress-fill" id="pFill" style="width:4%"></div></div>
+
+<button class="back-btn" id="backBtn" onclick="goBack()" aria-label="Voltar">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 18l-6-6 6-6"/>
+    </svg>
+</button>
+
+<div class="wrapper">
+
+<!-- ═══════════ ETAPA 1 ═══════════ -->
+<div class="step active" id="s1">
+    <p class="step-title mt24">Existe uma razão específica pela qual o dinheiro ainda não ficou na sua vida.</p>
+    <p class="step-sub mt8">E não tem nada a ver com esforço. Nem com sorte. Nem com o quanto você trabalha.<br><br>
+Tem a ver com algo que ninguém nunca te mostrou: o seu <strong>padrão oculto com o dinheiro</strong>.<br><br>
+Pessoas com o mesmo salário, na mesma cidade, com a mesma escolaridade… vivem realidades financeiras completamente diferentes.<br><br>
+Por quê?<br><br>
+Porque cada pessoa tem um <strong>Perfil de Prosperidade</strong> — e enquanto você não souber o seu, vai continuar repetindo o mesmo ciclo sem entender por quê.</p>
+    <p class="step-hint mt8">Antes de revelar o seu perfil, me diz:<br>Qual dessas frases descreve melhor o que você vive hoje?<br>(Selecione uma opção para continuar)</p>
+    <div class="options mt16">
+        <button class="opt" onclick="pickSingle(this,1)"><span>🔘 Me esforço mais do que a maioria, mas quando olho pro saldo… parece que o dinheiro some.</span><span class="opt-circle plain-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,1)"><span>🔘 Consigo ganhar, às vezes até ganho bem — mas o dinheiro nunca fica. Sempre aparece um rombo.</span><span class="opt-circle plain-circle"></span></button>
+    </div>
+</div>
+
+<!-- ═══════════ ETAPA 2 ═══════════ -->
+<div class="step" id="s2">
+    <p class="step-title mt24">Você já buscou alguma solução para mudar sua realidade financeira?</p>
+    <p class="step-hint">(Escolha uma opção para avançar)</p>
+    <div class="options mt16">
+        <button class="opt" onclick="pickSingle(this,2)"><span>🔘 Sim, já tentei algumas coisas</span><span class="opt-circle plain-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,2)"><span>🔘 Não, sempre tentei resolver sozinho(a)</span><span class="opt-circle plain-circle"></span></button>
+    </div>
+</div>
+
+<!-- ═══════════ ETAPA 3 ═══════════ -->
+<div class="step" id="s3">
+    <p class="step-title mt24">Se você pudesse escolher sua próxima fase financeira, qual seria?</p>
+    <p class="step-hint">(Escolha uma opção para avançar)</p>
+    <div class="options mt16">
+        <button class="opt" onclick="pickSingle(this,3)"><span>🏠 Ter estabilidade e nunca mais se preocupar com contas</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,3)"><span>🚗 Aumentar sua renda para trocar de carro, morar melhor e comprar o que deseja</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,3)"><span>🔍 Ainda não sei exatamente… só sei que preciso mudar</span><span class="opt-circle"></span></button>
+    </div>
+</div>
+
+<!-- ═══════════ ETAPA 4 ═══════════ -->
+<div class="step" id="s4">
+    <p class="step-title mt24">Hoje, qual desses padrões mais aparece na sua vida financeira?</p>
+    <p class="step-hint">(Escolha uma opção para avançar)</p>
+    <div class="options mt16">
+        <button class="opt" onclick="pickSingle(this,4)"><span>⚡ Imprevistos financeiros frequentes</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,4)"><span>🔄 Ciclos de ganho seguidos por perdas</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,4)"><span>😰 Medo constante de faltar dinheiro</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,4)"><span>🔒 Sensação de que minha prosperidade está travada</span><span class="opt-circle"></span></button>
+    </div>
+</div>
+
+<!-- ═══════════ ETAPA 5 ═══════════ -->
+<div class="step" id="s5">
+    <p class="step-title mt24">Quando o assunto é dinheiro, você se sente…</p>
+    <p class="step-hint">(Escolha uma opção para avançar)</p>
+    <div class="options mt16">
+        <button class="opt" onclick="pickSingle(this,5)"><span>😰 Constantemente tenso(a) ou preocupado(a)</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,5)"><span>😓 Sobrecarregado(a) na maior parte do tempo</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,5)"><span>😌 Relativamente tranquilo(a)</span><span class="opt-circle"></span></button>
+    </div>
+</div>
+
+<!-- ═══════════ ETAPA 6 ═══════════ -->
+<div class="step" id="s6">
+    <p class="step-title mt24">Antes de querer prosperar de verdade, qual era sua relação com o dinheiro?</p>
+    <p class="step-hint">(Escolha uma opção para avançar)</p>
+    <div class="options mt16">
+        <button class="opt" onclick="pickSingle(this,6)"><span>🔁 Eu já buscava crescer, mas sempre cometia os mesmos erros</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,6)"><span>⏰ Sabia que precisava mudar, mas sempre deixava para depois</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,6)"><span>🙈 Evitei organizar minha vida financeira até virar um problema</span><span class="opt-circle"></span></button>
+    </div>
+</div>
+
+<!-- ═══════════ ETAPA 7 ═══════════ -->
+<div class="step" id="s7">
+    <p class="step-title mt24">Quando surge uma oportunidade de ganhar mais dinheiro, você:</p>
+    <p class="step-hint">(Escolha uma opção para avançar)</p>
+    <div class="options mt16">
+        <button class="opt" onclick="pickSingle(this,7)"><span>🚫 Desconfia imediatamente, parece bom demais para ser verdade</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,7)"><span>😬 Hesita muito e procura todos os riscos possíveis</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,7)"><span>🧐 Analisa cuidadosamente antes de decidir</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,7)"><span>⚡ Avalia rapidamente e age se fizer sentido</span><span class="opt-circle"></span></button>
+    </div>
+</div>
+
+<!-- ═══════════ ETAPA 8 ═══════════ -->
+<div class="step" id="s8">
+    <p class="step-title mt24">Você sente que precisa de aprovação de alguém para buscar riqueza?</p>
+    <p class="step-hint">(Escolha uma opção para avançar)</p>
+    <div class="options mt16">
+        <button class="opt" onclick="pickSingle(this,8)"><span>👨‍👩‍👧 Sim, minha família/parceiro(a) precisa concordar</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,8)"><span>👥 Sinto que algumas pessoas importantes não aprovariam</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,8)"><span>🤷 Às vezes me preocupo com o que vão pensar</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,8)"><span>💎 Não, só eu decido meus objetivos financeiros</span><span class="opt-circle"></span></button>
+    </div>
+</div>
+
+<!-- ═══════════ ETAPA 9 ═══════════ -->
+<div class="step" id="s9">
+    <p class="step-title mt24">Se nada mudar na sua vida financeira nos próximos 12 meses…</p>
+    <p class="step-sub">Você estaria em paz com isso?</p>
+    <p class="step-hint mt8">(Escolha uma opção para avançar)</p>
+    <div class="options mt16">
+        <button class="opt" onclick="pickSingle(this,9)"><span>🚀 Não. Eu não aceito continuar no mesmo nível</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,9)"><span>🤔 Eu preciso mudar, mas ainda tenho dúvidas</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,9)"><span>😶 Talvez… já me acostumei com esse padrão</span><span class="opt-circle"></span></button>
+    </div>
+</div>
+
+<!-- ═══════════ ETAPA 10 — TEXTO INTERMEDIÁRIO ═══════════ -->
+<div class="step" id="s10">
+    <div class="proof-block mt24">
+        <p class="step-title green">O Programa de Proteção e Prosperidade</p>
+        <p class="step-sub mt8">Reúne ativações que <strong>realmente funcionam</strong> para desbloquear sua vida financeira.<br><br>Vamos criar um <strong>Plano Personalizado</strong> para você aplicar imediatamente na sua rotina. Continue respondendo para gerar seu plano de ativação com orientações práticas que começam a transformar sua energia financeira desde o primeiro dia.</p>
+        <div class="chart-wrap mt16" style="width:100%">
+            <h3>Resultados após aplicar o método</h3>
+            <div class="bar-row"><span class="bar-label">Mais renda</span><div class="bar-track"><div class="bar-fill" data-w="87"><span>87%</span></div></div></div>
+            <div class="bar-row"><span class="bar-label">Mais estabilidade</span><div class="bar-track"><div class="bar-fill" data-w="91"><span>91%</span></div></div></div>
+            <div class="bar-row"><span class="bar-label">Menos ansiedade</span><div class="bar-track"><div class="bar-fill" data-w="84"><span>84%</span></div></div></div>
+            <div class="bar-row"><span class="bar-label">Dívidas quitadas</span><div class="bar-track"><div class="bar-fill" data-w="79"><span>79%</span></div></div></div>
+        </div>
+    </div>
+    
+</div>
+
+<!-- ═══════════ ETAPA 11 ═══════════ -->
+<div class="step" id="s11">
+    <p class="step-title mt24">Qual dessas situações já te doeu profundamente em silêncio?</p>
+    <p class="step-hint">(Escolha uma opção para avançar)</p>
+    <div class="options mt16">
+        <button class="opt" onclick="pickSingle(this,11)"><span>👴 Querer ajudar meus pais e não poder</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,11)"><span>💔 Não conseguir ajudar quem eu amo quando mais precisavam</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,11)"><span>🎭 Finjo que está tudo bem, mas por dentro sei que estou no limite</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,11)"><span>✅ Hoje não vivo mais esse tipo de situação</span><span class="opt-circle"></span></button>
+    </div>
+</div>
+
+<!-- ═══════════ ETAPA 12 ═══════════ -->
+<div class="step" id="s12">
+    <p class="step-title mt24">Como o dinheiro tem afetado suas noites de sono?</p>
+    <p class="step-hint">(Escolha uma opção para avançar)</p>
+    <div class="options mt16">
+        <button class="opt" onclick="pickSingle(this,12)"><span>🌓 Oscilo entre dias bons e dias de preocupação</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,12)"><span>🧮 Deito cansado(a), e minha mente continua fazendo cálculos</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,12)"><span>😴 Já perdi noites de sono por causa da minha situação financeira</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,12)"><span>🌙 Durmo tranquilo(a), sem peso financeiro</span><span class="opt-circle"></span></button>
+    </div>
+</div>
+
+<!-- ═══════════ ETAPA 13 ═══════════ -->
+<div class="step" id="s13">
+    <p class="step-title mt24">De 0 a 10… Quanto você sente que já evoluiu financeiramente em relação ao que deseja?</p>
+    <p class="step-sub" style="font-size:13px"><em>Por favor, arraste o indicador.<br>(0 = totalmente travado(a) &nbsp;|&nbsp; 10 = vivendo a prosperidade que sempre quis)</em></p>
+    <div class="range-section mt24">
+        <div class="range-big-num" id="rangeNum">5</div>
+        <input type="range" id="rangeSlider" min="0" max="10" value="5" oninput="onRange(this)" style="--val:50%">
+        <div class="range-labels"><span>0 — Travado(a)</span><span>10 — Prosperando</span></div>
+    </div>
+    <div class="chart-wrap mt16">
+        <h3>Sua posição atual no caminho da prosperidade</h3>
+        <canvas id="gaugeCanvas" style="display:block;width:100%"></canvas>
+    </div>
+    <button class="btn-continue mt8" onclick="goTo(14)">Continuar</button>
+</div>
+
+<!-- ═══════════ ETAPA 14 — NOME ═══════════ -->
+<div class="step" id="s14">
+    <p class="step-title mt24">Qual é o seu nome?</p>
+    <p class="step-hint">Para personalizar seu plano</p>
+    <div class="input-wrap mt16">
+        <input type="text" class="input-field" id="nameInput" placeholder="Digite seu nome aqui…" oninput="checkName()">
+    </div>
+    <button class="btn-continue" id="btnS14" disabled onclick="goTo('14b')">Continuar</button>
+</div>
+
+<!-- ═══════════ ETAPA 14b — GRÁFICO DE PROGRESSO ═══════════ -->
+<div class="step" id="s14b">
+    <p class="step-title mt24">Seu nível atual de <span style="color:var(--blue)">alinhamento financeiro</span></p>
+    <p class="step-sub mt8">Com base nas suas respostas, identificamos onde você está agora e onde o método pode te levar.</p>
+
+    <div class="alert-box mt16">
+        <strong>Atenção:</strong> o nível ideal de <strong>alinhamento financeiro</strong> para destravar sua prosperidade começa a partir de <strong>75%</strong>
+    </div>
+
+    <div class="chart-wrap" style="padding:18px 14px">
+        <h3>Seu progresso no caminho da prosperidade</h3>
+        <canvas id="progressChart" style="display:block;width:100%"></canvas>
+    </div>
+
+    <div class="danger-box">
+        <div class="danger-box-title">
+            <span style="font-size:18px">⚠️</span> Bloqueio financeiro ativo:
+        </div>
+        <p>Sem destravar seus padrões de escassez, sua energia continua atraindo mais do mesmo — contas, imprevistos e estagnação. O método age exatamente nesse ponto para abrir novos ciclos de prosperidade na sua vida.</p>
+    </div>
+
+    <button class="btn-continue mt16" onclick="goTo(15)">Continuar</button>
+</div>
+
+<!-- ═══════════ ETAPA 15 — EMAIL ═══════════ -->
+<div class="step" id="s15">
+    <p class="step-title mt24">Para onde enviamos seu Plano de Ativação?</p>
+    <p class="step-sub">Informe seu melhor e-mail para receber seu plano personalizado.</p>
+    <div class="input-wrap mt16">
+        <input type="email" class="input-field" id="emailInput" placeholder="seuemail@exemplo.com" oninput="checkEmail()">
+    </div>
+    <button class="btn-continue" id="btnS15" disabled onclick="goTo(16)">Quero meu plano!</button>
+    <p class="fine-print mt8">🔒 Seus dados estão seguros e não serão compartilhados.</p>
+</div>
+
+<!-- ═══════════ ETAPA 16 — TEMPO DISPONÍVEL ═══════════ -->
+<div class="step" id="s16">
+    <p class="step-title mt24">Você tem quantos minutos por dia livres para praticar?</p>
+    <p class="step-hint">(Escolha uma opção para avançar)</p>
+    <div class="options mt16">
+        <button class="opt" onclick="pickSingle(this,16)"><span>⏱️ 10 a 15 minutos <small style="opacity:.8">(mínimo recomendado)</small></span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,16)"><span>⏰ 15 a 20 minutos</span><span class="opt-circle"></span></button>
+        <button class="opt" onclick="pickSingle(this,16)"><span>🕐 25 minutos ou mais</span><span class="opt-circle"></span></button>
+    </div>
+</div>
+
+<!-- ═══════════ ETAPA 17 — LOADER ═══════════ -->
+<div class="step" id="s17">
+    <div class="loader-section mt24">
+        <div class="loader-emoji">✨</div>
+        <p class="step-title">Criando seu plano de Ativação da Prosperidade que realmente funciona…</p>
+        <p class="step-sub mt8">Estamos analisando suas respostas para montar um plano que realmente funciona para você.</p>
+        <div class="loader-track"><div class="loader-fill" id="loaderFill"></div></div>
+        <p class="loader-msg" id="loaderMsg">Analisando seu perfil…</p>
+    </div>
+</div>
+
+<!-- ═══════════ ETAPA 18 — PLANO PRONTO ═══════════ -->
+<div class="step" id="s18">
+    <div class="result-hero mt24">
+        <h2>Montamos um plano incrível para você. 🎉</h2>
+        <div class="result-days">7 dias</div>
+        <p>Com base nos resultados das pessoas que já aplicaram o programa, é possível começar a sentir mudanças na sua energia financeira em até <strong>7 dias</strong>.<br><br>E o melhor: com ativações simples que você pode aplicar na sua própria rotina.</p>
+    </div>
+    <div class="chart-wrap">
+        <h3>Linha do tempo de transformação</h3>
+        <canvas id="lineChart" style="display:block;width:100%"></canvas>
+    </div>
+    <button class="btn-cta" onclick="goTo(19)">Quero começar agora →</button>
+</div>
+
+<!-- ═══════════ ETAPA 19 — DEPOIMENTOS ═══════════ -->
+<div class="step" id="s19">
+    <p class="step-title mt24">Relatos de pessoas que passaram pelo <span style="color:var(--blue)">Programa de Proteção e Prosperidade</span></p>
+    <p class="step-sub mt8">Milhares tiveram a vida financeira transformada com a ajuda do programa.</p>
+    <div class="gap-block mt12">
+        <div class="testi testi-compact">"Depois de aplicar as ativações, em menos de 2 semanas minha vida financeira começou a mudar de verdade. É incrível como algo tão simples pode ter um impacto tão grande."<div class="testi-name">— Maria S., 38 anos ⭐⭐⭐⭐⭐</div></div>
+        <div class="testi testi-compact">"Eu estava no ciclo de ganhar e perder há anos. O método me ajudou a identificar o padrão e quebrá-lo. Hoje tenho reserva e estou investindo."<div class="testi-name">— Carlos M., 45 anos ⭐⭐⭐⭐⭐</div></div>
+    </div>
+    <div class="stars-badge mt12">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <div class="rating">4,9 / 5</div>
+        <div class="count">Avaliação de mais de 55.000 pessoas</div>
+    </div>
+    <button class="btn-cta" style="margin-top:14px" onclick="goTo(20)">🔓 Quero ativar minha prosperidade agora</button>
+    <p class="fine-print mt8">✅ Acesso imediato &nbsp;•&nbsp; Garantia de 7 dias</p>
+</div>
+
+<!-- ═══════════ ETAPA 20 — SALES PAGE ═══════════ -->
+<div class="step" id="s20">
+
+    <div class="sp-topbar">🔒 Condição especial liberada apenas para quem concluiu o diagnóstico</div>
+    <div class="sp-deco-bar"></div>
+
+    <h1 class="sp-h1">Seu Plano <span class="sp-green">está pronto.</span></h1>
+    <p class="sp-sub">Com base nas suas respostas, identificamos os principais pontos que hoje estão travando sua prosperidade financeira.</p>
+    <p class="sp-sub mt8">Agora você vai receber o <strong>Plano de Ativação 7 Dias Para Destravar Sua Prosperidade</strong> com práticas simples que começam a reorganizar sua energia financeira e abrir espaço para crescimento real.</p>
+
+    <div class="sp-compare-grid">
+        <div class="sp-card">
+            <div class="sp-card-hd sp-before-hd">Antes da Ativação de Prosperidade</div>
+            <div class="sp-bar-area">
+                <div class="sp-pct sp-pct-before" id="spPctBefore">0%</div>
+                <div class="sp-vbar-track"><div class="sp-vbar-fill sp-vbar-before" id="spBarBefore"></div></div>
+            </div>
+            <ul class="sp-list sp-list-before">
+                <li>Dinheiro entra, mas não permanece</li>
+                <li>Preocupação constante com contas</li>
+                <li>Sensação de estar sempre correndo atrás</li>
+                <li>Falta de clareza sobre como prosperar</li>
+            </ul>
+        </div>
+        <div class="sp-card">
+            <div class="sp-card-hd sp-after-hd">Depois da Ativação de Prosperidade</div>
+            <div class="sp-bar-area">
+                <div class="sp-pct sp-pct-after" id="spPctAfter">0%</div>
+                <div class="sp-vbar-track"><div class="sp-vbar-fill sp-vbar-after" id="spBarAfter"></div></div>
+            </div>
+            <ul class="sp-list sp-list-after">
+                <li>Mais clareza nas decisões financeiras</li>
+                <li>Energia alinhada com prosperidade</li>
+                <li>Mentalidade para crescer financeiramente</li>
+                <li>Confiança para subir de padrão de vida</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="sp-promo-faixa">⚡ Condição especial liberada apenas para quem concluiu o diagnóstico</div>
+    <div class="sp-promo-body">
+        <p class="sp-section-title">Acesso completo ao <span class="sp-green">Plano de 7 Dias Para Destravar Sua Prosperidade</span></p>
+        <p class="sp-sub mt8">Pagamento único, acesso por 12 meses</p>
+        <div class="sp-plan-row mt16">
+            <div class="sp-radio"><div class="sp-radio-dot"></div></div>
+            <div class="sp-plan-label">Pagamento único · acesso 12 meses</div>
+            <div class="sp-price-box">
+                <div class="sp-from">De R$ 297</div>
+                <div class="sp-price-main"><sup>R$</sup>47,00</div>
+                <div class="sp-price-unit">à vista</div>
+            </div>
+        </div>
+    </div>
+    <a href="https://pay.hotmart.com/V103459356F?checkoutMode=10" target="_blank" class="sp-btn sp-btn-pulse">QUERO ATIVAR MINHA PROSPERIDADE AGORA</a>
+    <p class="sp-fine">✅ Acesso imediato &nbsp;•&nbsp; Garantia de 7 dias &nbsp;•&nbsp; Pagamento seguro</p>
+
+    <div class="sp-divider"></div>
+
+    <p class="sp-section-title">Destaques do seu plano:</p>
+    <div class="sp-features">
+        <div class="sp-feat"><div class="sp-feat-icon">✅</div><div><div class="sp-feat-title">Protocolos de Ativação de Prosperidade</div><div class="sp-feat-desc">Sequência completa de práticas para quebrar ciclos de escassez e ativar novos fluxos de prosperidade.</div></div></div>
+        <div class="sp-feat"><div class="sp-feat-icon">✅</div><div><div class="sp-feat-title">Técnica de Blindagem Financeira</div><div class="sp-feat-desc">Ativação para proteger sua vida financeira contra perdas inesperadas e padrões repetitivos de escassez.</div></div></div>
+        <div class="sp-feat"><div class="sp-feat-icon">✅</div><div><div class="sp-feat-title">Afirmações de Reprogramação da Mentalidade de Riqueza</div><div class="sp-feat-desc">Exercícios guiados para substituir padrões de limitação por mentalidade de abundância.</div></div></div>
+        <div class="sp-feat"><div class="sp-feat-icon">✅</div><div><div class="sp-feat-title">Orações de Alinhamento com Prosperidade</div><div class="sp-feat-desc">Práticas espirituais para fortalecer fé, intenção e conexão com oportunidades financeiras.</div></div></div>
+        <div class="sp-feat"><div class="sp-feat-icon">✅</div><div><div class="sp-feat-title">Método de Ativação da Consciência Financeira</div><div class="sp-feat-desc">Estrutura prática para enxergar novas oportunidades e tomar decisões que aumentam sua prosperidade.</div></div></div>
+        <div class="sp-feat"><div class="sp-feat-icon">✅</div><div><div class="sp-feat-title">Acesso por 12 meses</div><div class="sp-feat-desc">Tempo suficiente para aplicar as ativações e consolidar uma nova fase financeira.</div></div></div>
+    </div>
+
+    <div class="sp-img-block mt16">
+        <img src="2.png" alt="Experimente primeiro e decida depois">
+    </div>
+
+    <div class="sp-divider"></div>
+
+    <p class="sp-body-text">Com apenas <strong>15 a 20 minutos por dia</strong>, você já pode começar a ativar mudanças reais na sua vida financeira.</p>
+    <p class="sp-body-text mt8">Preocupações constantes com dinheiro, medo de imprevistos e padrões repetitivos de escassez podem bloquear sua prosperidade e limitar suas oportunidades.</p>
+    <p class="sp-section-title mt16">Este plano foi criado para ajudar você a:</p>
+    <div class="sp-highlights">
+        <div class="sp-hl"><span class="sp-hl-ico">✅</span> Reduzir a ansiedade e o peso emocional ligado ao dinheiro</div>
+        <div class="sp-hl"><span class="sp-hl-ico">✅</span> Ativar uma mentalidade mais alinhada com prosperidade e crescimento financeiro</div>
+        <div class="sp-hl"><span class="sp-hl-ico">✅</span> Proteger sua vida financeira contra padrões de perda e estagnação</div>
+    </div>
+
+    <div class="sp-adquira mt48">
+        <h2 class="sp-adquira-title">Adquira agora o seu plano</h2>
+        <div class="sp-desc-banner">Desconto liberado para hoje (<span id="spDataHoje"></span>)</div>
+        <div class="sp-adquira-card">
+            <div class="sp-adq-row">
+                <div class="sp-adq-radio"></div>
+                <div class="sp-adq-label">DE R$<s>297</s> POR APENAS R$47,00</div>
+                <div class="sp-adq-price">
+                    <div class="sp-adq-from">De R$ 297 Por</div>
+                    <div class="sp-adq-main"><sup>R$</sup>47,00</div>
+                    <div class="sp-adq-unit">à vista</div>
+                </div>
+            </div>
+        </div>
+        <div class="sp-timer-card">
+            <div class="sp-timer-label">Resgate agora seu desconto:</div>
+            <div class="sp-timer-num" id="spCountdown">10:00</div>
+        </div>
+        <a href="https://pay.hotmart.com/V103459356F?checkoutMode=10" target="_blank" class="sp-btn sp-btn-red sp-btn-pulse-red mt16">QUERO GARANTIR MEU PLANO COM DESCONTO</a>
+        <p class="sp-fine">✅ Acesso imediato &nbsp;•&nbsp; Garantia de 7 dias &nbsp;•&nbsp; Pagamento seguro</p>
+    </div>
+
+    <div class="sp-divider"></div>
+
+    <p class="sp-section-title">Perguntas frequentes</p>
+    <div class="sp-faq">
+        <div class="sp-faq-item"><button class="sp-faq-q" onclick="spToggleFaq(this)"><span>Isso realmente pode ajudar a melhorar minha vida financeira?</span><span class="sp-arrow">▾</span></button><div class="sp-faq-a">Sim. O plano reúne ativações, práticas e direcionamentos que ajudam a reorganizar sua mentalidade financeira, reduzir bloqueios e abrir espaço para novas oportunidades de prosperidade.</div></div>
+        <div class="sp-faq-item"><button class="sp-faq-q" onclick="spToggleFaq(this)"><span>Quanto tempo preciso dedicar por dia?</span><span class="sp-arrow">▾</span></button><div class="sp-faq-a">A maioria das práticas leva entre 15 e 20 minutos por dia. São exercícios simples que você pode aplicar dentro da sua própria rotina.</div></div>
+        <div class="sp-faq-item"><button class="sp-faq-q" onclick="spToggleFaq(this)"><span>Preciso ter conhecimento sobre finanças ou espiritualidade?</span><span class="sp-arrow">▾</span></button><div class="sp-faq-a">Não. O plano foi criado para qualquer pessoa que deseja destravar sua prosperidade em 7 dias, mesmo que nunca tenha estudado sobre dinheiro ou práticas energéticas antes.</div></div>
+        <div class="sp-faq-item"><button class="sp-faq-q" onclick="spToggleFaq(this)"><span>Em quanto tempo posso começar a perceber mudanças?</span><span class="sp-arrow">▾</span></button><div class="sp-faq-a">Muitas pessoas relatam mais clareza financeira, sensação de leveza e novas oportunidades já nos primeiros dias de aplicação das práticas.</div></div>
+        <div class="sp-faq-item"><button class="sp-faq-q" onclick="spToggleFaq(this)"><span>Por quanto tempo terei acesso ao plano?</span><span class="sp-arrow">▾</span></button><div class="sp-faq-a">Você terá acesso completo por 12 meses, podendo assistir e aplicar as ativações quantas vezes quiser.</div></div>
+        <div class="sp-faq-item"><button class="sp-faq-q" onclick="spToggleFaq(this)"><span>Onde vou receber o acesso ao plano?</span><span class="sp-arrow">▾</span></button><div class="sp-faq-a">Assim que seu pagamento for confirmado, você receberá um e-mail com todas as instruções de acesso. Lá você poderá assistir às aulas e aplicar as práticas pelo celular, tablet ou computador.</div></div>
+    </div>
+
+    <a href="https://pay.hotmart.com/V103459356F?checkoutMode=10" target="_blank" class="sp-btn sp-btn-pulse mt24">QUERO ATIVAR MINHA PROSPERIDADE AGORA</a>
+    <p class="sp-fine mt8">✅ Acesso imediato &nbsp;•&nbsp; Garantia de 7 dias &nbsp;•&nbsp; Pagamento seguro</p>
+    <div class="spacer"></div>
+
+</div><!-- /s20 -->
+
+</div><!-- /wrapper -->
+<script>
+// ── SUPABASE ──
+const SUPABASE_URL = 'https://shjatusmztpijaxozhrd.supabase.co'
+const SUPABASE_KEY = 'sb_publishable_SQtRju628XGgL9u8SKwXMQ_Z6NAGE5N'
+const _sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+
+// ── SESSION ID único por visita ──
+const _sessionId = Math.random().toString(36).slice(2) + Date.now().toString(36)
+
+// ── MAPA DE NOMES DAS ETAPAS ──
+const ETAPA_NOMES = {
+    1:  'Perfil inicial',
+    2:  'Já buscou solução?',
+    3:  'Próxima fase financeira',
+    4:  'Padrões financeiros',
+    5:  'Emoção com dinheiro',
+    6:  'Relação passada com dinheiro',
+    7:  'Oportunidades de ganhar mais',
+    8:  'Precisa de aprovação?',
+    9:  'Aceitação da estagnação',
+    10: 'Texto intermediário do programa',
+    11: 'Situação dolorosa em silêncio',
+    12: 'Noites de sono',
+    13: 'Gauge prosperidade',
+    14: 'Nome',
+    '14b': 'Gráfico alinhamento',
+    15: 'Email',
+    16: 'Tempo disponível',
+    17: 'Loader',
+    18: 'Plano pronto',
+    19: 'Depoimentos',
+    20: 'Página de vendas'
+}
+
+async function registrarEtapa(etapa) {
+    try {
+        await _sb.from('eventos').insert([{
+            session_id: _sessionId,
+            etapa: isNaN(etapa) ? 0 : Number(etapa),
+            etapa_nome: ETAPA_NOMES[etapa] || ('Etapa ' + etapa)
+        }])
+    } catch(e) {}
+}
+
+async function salvarLead() {
+    const nome  = (document.getElementById('nameInput')?.value  || '').trim()
+    const email = (document.getElementById('emailInput')?.value || '').trim()
+    if (!email) return
+    try {
+        const { error } = await _sb.from('leads').insert([{ nome, email }])
+        if (error) console.error('Supabase error:', error)
+    } catch (e) {}
+}
+
+// ── HISTORY ──
+const history_stack = [];
+const TOTAL = 20;
+
+function stepNum(k) {
+    if (k === '14b') return 14.5;
+    return parseFloat(k);
+}
+
+// Mapa de próxima etapa para single-select
+const NEXT = {
+    1: 2,
+    3: 4,
+    5: 6,
+    6: 7,
+    7: 8,
+    8: 9,
+    9: 10,
+    11: 12,
+    12: 13,
+    16: 17
+};
+
+let currentStep = 1;
+
+function goTo(n) {
+    history_stack.push(currentStep);
+    currentStep = n;
+    _showStep(n);
+}
+
+function goBack() {
+    if (history_stack.length === 0) return;
+    currentStep = history_stack.pop();
+    _showStep(currentStep);
+}
+
+function _showStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById('s' + n);
+    if (el) el.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (n === 20) {
+        document.getElementById('pFill').parentElement.style.display = 'none';
+    } else {
+        document.getElementById('pFill').parentElement.style.display = '';
+        const pct = Math.min(100, Math.round((stepNum(n) / TOTAL) * 100));
+        document.getElementById('pFill').style.width = Math.max(pct, 4) + '%';
+    }
+
+    document.getElementById('backBtn').classList.toggle('visible', history_stack.length > 0 && n !== 20);
+
+    // Registra etapa no Supabase
+    registrarEtapa(n);
+
+    if (n === 17)    startLoader();
+    if (n === 13)    initGauge(5);
+    if (n === 18)    setTimeout(drawLineChart, 300);
+    if (n === 10)    setTimeout(animateBars, 400);
+    if (n === '14b') setTimeout(drawProgressChart, 400);
+    if (n === 20)    setTimeout(spInitSalesPage, 400);
+}
+
+// ── SINGLE SELECT ──
+function pickSingle(el, step) {
+    el.closest('.options').querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    setTimeout(() => {
+        const next = NEXT[step] !== undefined ? NEXT[step] : step + 1;
+        goTo(next);
+    }, 320);
+}
+
+// ── MULTI SELECT ──
+function pickMulti(el, btnId) {
+    el.classList.toggle('selected');
+    const any = el.closest('.options').querySelectorAll('.opt.selected').length > 0;
+    document.getElementById(btnId).disabled = !any;
+}
+
+// ── RANGE ──
+function onRange(input) {
+    const v = parseInt(input.value);
+    document.getElementById('rangeNum').textContent = v;
+    input.style.setProperty('--val', (v / 10 * 100) + '%');
+    initGauge(v);
+}
+
+// ── INPUTS ──
+function checkName() {
+    document.getElementById('btnS14').disabled = document.getElementById('nameInput').value.trim().length < 2;
+}
+function checkEmail() {
+    const v = document.getElementById('emailInput').value.trim();
+    document.getElementById('btnS15').disabled = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+}
+
+// ── LOADER ──
+function startLoader() {
+    const fill = document.getElementById('loaderFill');
+    fill.style.animation = 'none';
+    fill.offsetHeight;
+    fill.style.animation = 'loadGrow 3.2s ease forwards';
+    const msgs = ['Analisando seu perfil…','Identificando seus bloqueios…','Mapeando sua energia financeira…','Montando seu plano personalizado…','Quase pronto!'];
+    let i = 0;
+    const txt = document.getElementById('loaderMsg');
+    txt.textContent = msgs[0];
+    const iv = setInterval(() => { i++; if (i < msgs.length) txt.textContent = msgs[i]; }, 640);
+    setTimeout(() => { clearInterval(iv); goTo(18); }, 3300);
+}
+
+// ── ANIMATED BARS (etapa 10) ──
+function animateBars() {
+    document.querySelectorAll('#s10 .bar-fill').forEach(bar => {
+        const w = bar.getAttribute('data-w');
+        bar.style.width = '0%';
+        requestAnimationFrame(() => { setTimeout(() => { bar.style.width = w + '%'; }, 50); });
+    });
+    setTimeout(() => { goTo(11); }, 2800);
+}
+
+// ── GAUGE (etapa 13) ──
+function initGauge(val) {
+    const canvas = document.getElementById('gaugeCanvas');
+    if (!canvas) return;
+    const container = canvas.parentElement;
+    const W = container.clientWidth - 32;
+    canvas.width = W; canvas.height = Math.round(W * 0.55);
+    const ctx = canvas.getContext('2d');
+    const H = canvas.height;
+    ctx.clearRect(0, 0, W, H);
+    const cx = W/2, cy = H-10, r = Math.round(W*0.38), lw = Math.round(W*0.065);
+
+    ctx.beginPath(); ctx.arc(cx,cy,r,Math.PI,0);
+    ctx.strokeStyle='#c8e8d0'; ctx.lineWidth=lw; ctx.lineCap='round'; ctx.stroke();
+
+    const pct = val/10;
+    ctx.beginPath(); ctx.arc(cx,cy,r,Math.PI,Math.PI+pct*Math.PI);
+    ctx.strokeStyle='#1a7a3a'; ctx.lineWidth=lw; ctx.lineCap='round'; ctx.stroke();
+
+    const angle=Math.PI+pct*Math.PI, nx=cx+r*Math.cos(angle), ny=cy+r*Math.sin(angle);
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(nx,ny);
+    ctx.strokeStyle='#0f5228'; ctx.lineWidth=3; ctx.stroke();
+
+    ctx.beginPath(); ctx.arc(cx,cy,Math.round(W*0.025),0,2*Math.PI);
+    ctx.fillStyle='#1a7a3a'; ctx.fill();
+
+    ctx.fillStyle='#111'; ctx.font=`bold ${Math.round(W*0.09)}px Inter,sans-serif`;
+    ctx.textAlign='center'; ctx.fillText(val+'/10',cx,cy-r*0.35);
+    ctx.fillStyle='#2d6b45'; ctx.font=`${Math.round(W*0.048)}px Inter,sans-serif`;
+    ctx.fillText(val<4?'Ainda travado(a)':val<7?'Em evolução':'Quase lá!',cx,cy-r*0.14);
+}
+
+// ── PROGRESS CHART (etapa 14b) ──
+function drawProgressChart() {
+    const canvas = document.getElementById('progressChart');
+    if (!canvas) return;
+    const container = canvas.parentElement;
+    const W = Math.max(container.clientWidth-32,200), H = Math.round(W*0.55);
+    canvas.width=W; canvas.height=H;
+    const ctx=canvas.getContext('2d'); ctx.clearRect(0,0,W,H);
+    const pad={l:32,r:16,t:14,b:36}, gW=W-pad.l-pad.r, gH=H-pad.t-pad.b;
+    const xTicks=[0,0.222,0.722,1.0], xLabels=['10%','30%','75%','100% Preparada'];
+    const rawPts=[[0,0.95],[0.111,0.88],[0.222,0.72],[0.333,0.58],[0.444,0.44],[0.555,0.30],[0.722,0.18],[0.833,0.10],[1.0,0.04]];
+    const pts=rawPts.map(([nx,ny])=>({x:pad.l+nx*gW,y:pad.t+ny*gH}));
+
+    const grad=ctx.createLinearGradient(pad.l,0,pad.l+gW,0);
+    [{p:0,c:'rgba(220,60,60,0.55)'},{p:0.222,c:'rgba(240,160,0,0.5)'},{p:0.55,c:'rgba(80,180,80,0.45)'},{p:1,c:'rgba(40,160,40,0.55)'}]
+        .forEach(s=>grad.addColorStop(s.p,s.c));
+    ctx.beginPath(); ctx.moveTo(pts[0].x,pad.t+gH);
+    pts.forEach(p=>ctx.lineTo(p.x,p.y));
+    ctx.lineTo(pts[pts.length-1].x,pad.t+gH); ctx.closePath(); ctx.fillStyle=grad; ctx.fill();
+
+    const lg=ctx.createLinearGradient(pad.l,0,pad.l+gW,0);
+    lg.addColorStop(0,'#e03030'); lg.addColorStop(0.222,'#e0a000');
+    lg.addColorStop(0.55,'#50b450'); lg.addColorStop(1,'#28a028');
+    ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y);
+    pts.forEach(p=>ctx.lineTo(p.x,p.y));
+    ctx.strokeStyle=lg; ctx.lineWidth=2.5; ctx.lineJoin='round'; ctx.stroke();
+
+    ctx.fillStyle='#888'; ctx.font=`${Math.max(8,Math.round(W*0.024))}px Inter,sans-serif`; ctx.textAlign='center';
+    xTicks.forEach((t,i)=>ctx.fillText(xLabels[i],pad.l+t*gW,H-4));
+
+    const pV=pts[2],pI=pts[5];
+    ctx.beginPath(); ctx.arc(pV.x,pV.y,6,0,2*Math.PI); ctx.fillStyle='#e03030'; ctx.fill(); ctx.strokeStyle='#fff'; ctx.lineWidth=2; ctx.stroke();
+    const tw1=72,th1=22,tx1=Math.min(pV.x-36,W-76),ty1=pV.y-30;
+    ctx.beginPath(); ctx.roundRect(tx1,ty1,tw1,th1,5); ctx.fillStyle='#e03030'; ctx.fill();
+    ctx.fillStyle='#fff'; ctx.font=`bold ${Math.max(9,Math.round(W*0.026))}px Inter,sans-serif`; ctx.textAlign='center';
+    ctx.fillText('Você hoje',tx1+36,ty1+15);
+
+    ctx.beginPath(); ctx.arc(pI.x,pI.y,6,0,2*Math.PI); ctx.fillStyle='#c8a000'; ctx.fill(); ctx.strokeStyle='#fff'; ctx.lineWidth=2; ctx.stroke();
+    const tw2=46,th2=22,tx2=Math.min(pI.x-23,W-50),ty2=pI.y-30;
+    ctx.beginPath(); ctx.roundRect(tx2,ty2,tw2,th2,5); ctx.fillStyle='#f5f5f5'; ctx.fill(); ctx.strokeStyle='#c8a000'; ctx.lineWidth=1.5; ctx.stroke();
+    ctx.fillStyle='#555'; ctx.font=`bold ${Math.max(9,Math.round(W*0.026))}px Inter,sans-serif`; ctx.textAlign='center';
+    ctx.fillText('Ideal',tx2+23,ty2+15);
+
+    const pL=pts[pts.length-1];
+    ctx.beginPath(); ctx.arc(pL.x,pL.y,6,0,2*Math.PI); ctx.fillStyle='#28a028'; ctx.fill(); ctx.strokeStyle='#fff'; ctx.lineWidth=2; ctx.stroke();
+}
+
+// ── LINE CHART (etapa 18) ──
+function drawLineChart() {
+    const canvas=document.getElementById('lineChart');
+    if(!canvas)return;
+    const W=canvas.parentElement.clientWidth-32, H=Math.round(W*0.38);
+    canvas.width=W; canvas.height=H;
+    const ctx=canvas.getContext('2d'); ctx.clearRect(0,0,W,H);
+    const labels=['Hoje','Dia 1','Dia 3','Dia 7','Mês 1','Mês 3'], values=[20,32,45,62,78,92];
+    const pad={l:28,r:12,t:14,b:26}, gW=W-pad.l-pad.r, gH=H-pad.t-pad.b;
+    [0,25,50,75,100].forEach(v=>{const y=pad.t+gH-(v/100)*gH;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(pad.l+gW,y);ctx.strokeStyle='#c8e8d0';ctx.lineWidth=1;ctx.stroke();});
+    const pts=values.map((v,i)=>({x:pad.l+(i/(labels.length-1))*gW,y:pad.t+gH-(v/100)*gH}));
+    const grad=ctx.createLinearGradient(0,pad.t,0,pad.t+gH);
+    grad.addColorStop(0,'rgba(26,122,58,0.25)'); grad.addColorStop(1,'rgba(26,122,58,0)');
+    ctx.beginPath(); ctx.moveTo(pts[0].x,pad.t+gH); pts.forEach(p=>ctx.lineTo(p.x,p.y));
+    ctx.lineTo(pts[pts.length-1].x,pad.t+gH); ctx.closePath(); ctx.fillStyle=grad; ctx.fill();
+    ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y); pts.forEach(p=>ctx.lineTo(p.x,p.y));
+    ctx.strokeStyle='#1a7a3a'; ctx.lineWidth=2.5; ctx.lineJoin='round'; ctx.stroke();
+    pts.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,4,0,2*Math.PI);ctx.fillStyle='#1a7a3a';ctx.fill();ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(p.x,p.y,2.5,0,2*Math.PI);ctx.fill();});
+    ctx.fillStyle='#888'; ctx.font=`${Math.max(9,Math.round(W*0.028))}px Inter,sans-serif`; ctx.textAlign='center';
+    labels.forEach((l,i)=>ctx.fillText(l,pad.l+(i/(labels.length-1))*gW,H-6));
+}
+
+// ── SALES PAGE ──
+function spInitSalesPage(){spAnimateBars();spStartCountdown(10);spSetDataHoje();}
+function spAnimateBars(){
+    const bB=document.getElementById('spBarBefore'),bA=document.getElementById('spBarAfter');
+    const pB=document.getElementById('spPctBefore'),pA=document.getElementById('spPctAfter');
+    if(!bB)return; let b=0,a=0;
+    function tick(){if(b<35){b++;bB.style.height=b+'%';pB.textContent=b+'%';}if(a<80){a++;bA.style.height=a+'%';pA.textContent=a+'%';}if(b<35||a<80)setTimeout(tick,20);}
+    tick();
+}
+function spToggleFaq(btn){btn.closest('.sp-faq-item').classList.toggle('sp-open');}
+let spCountdownInterval=null;
+function spStartCountdown(m){
+    if(spCountdownInterval)clearInterval(spCountdownInterval);
+    let t=m*60; const el=document.getElementById('spCountdown'); if(!el)return;
+    function u(){if(t<=0){el.textContent='00:00';clearInterval(spCountdownInterval);return;}el.textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0');t--;}
+    u(); spCountdownInterval=setInterval(u,1000);
+}
+function spSetDataHoje(){
+    const el=document.getElementById('spDataHoje'); if(!el)return;
+    const n=new Date(); el.textContent=String(n.getDate()).padStart(2,'0')+'/'+String(n.getMonth()+1).padStart(2,'0')+'/'+n.getFullYear();
+}
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded', () => {
+    const slider=document.getElementById('rangeSlider');
+    if(slider) slider.style.setProperty('--val','50%');
+
+    // Registra etapa 1 (entrada no quiz)
+    registrarEtapa(1);
+
+    // Patch botão etapa 15 (email)
+    const btnS15=document.getElementById('btnS15');
+    if(btnS15){
+        btnS15.removeAttribute('onclick');
+        btnS15.addEventListener('click',()=>{ salvarLead(); goTo(16); });
+    }
+});
+
+window.addEventListener('resize',()=>{
+    const a=document.querySelector('.step.active'); if(!a)return;
+    if(a.id==='s13')  initGauge(parseInt(document.getElementById('rangeSlider').value));
+    if(a.id==='s18')  drawLineChart();
+    if(a.id==='s14b') drawProgressChart();
+});
+
+</script>
+</body>
+</html>
