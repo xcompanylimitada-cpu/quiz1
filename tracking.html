@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard · Quiz Tracking</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root {
+    --green: #1a7a3a; --green-dark: #0f5228; --green-bg: #edf7f0;
+    --green-border: #a8ddb8; --red: #e03030; --orange: #e07800;
+    --yellow: #c8a000; --bg: #f4f6f8; --card: #fff;
+    --text: #111; --muted: #888; --border: #e0e0e0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  /* LOGIN */
+  #loginScreen {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; background: var(--green-dark);
+  }
+  .login-card {
+    background: #fff; border-radius: 16px; padding: 40px 32px;
+    width: 100%; max-width: 360px; text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .login-card h1 { font-size: 22px; font-weight: 900; color: var(--green-dark); margin-bottom: 6px; }
+  .login-card p  { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+  .login-input {
+    width: 100%; padding: 14px 16px; border: 2px solid var(--border);
+    border-radius: 10px; font-size: 15px; outline: none;
+    margin-bottom: 14px; transition: border-color .2s; text-align: center;
+    letter-spacing: 4px; font-weight: 700;
+  }
+  .login-input:focus { border-color: var(--green); }
+  .login-btn {
+    width: 100%; padding: 14px; background: var(--green); color: #fff;
+    border: none; border-radius: 10px; font-size: 15px; font-weight: 800;
+    cursor: pointer; transition: background .2s;
+  }
+  .login-btn:hover { background: var(--green-dark); }
+  .login-err { color: var(--red); font-size: 13px; margin-top: 10px; display: none; }
+
+  /* DASHBOARD */
+  #dashboard { display: none; }
+  .topbar {
+    background: var(--green-dark); color: #fff; padding: 16px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .topbar h1 { font-size: 18px; font-weight: 900; }
+  .topbar-right { display: flex; align-items: center; gap: 16px; }
+  .topbar .last-update { font-size: 12px; opacity: .7; }
+  .refresh-btn {
+    background: rgba(255,255,255,0.15); border: none; color: #fff;
+    padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 700;
+    cursor: pointer; transition: background .2s;
+  }
+  .refresh-btn:hover { background: rgba(255,255,255,0.25); }
+  .logout-btn {
+    background: none; border: 1px solid rgba(255,255,255,0.4); color: #fff;
+    padding: 6px 12px; border-radius: 8px; font-size: 12px; cursor: pointer;
+  }
+
+  .main { max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
+
+  /* CARDS RESUMO */
+  .summary-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px; margin-bottom: 24px;
+  }
+  .s-card {
+    background: var(--card); border-radius: 14px; padding: 20px;
+    border: 1px solid var(--border); text-align: center;
+  }
+  .s-card-icon { font-size: 28px; margin-bottom: 8px; }
+  .s-card-num  { font-size: 32px; font-weight: 900; color: var(--green-dark); line-height: 1; }
+  .s-card-label{ font-size: 12px; color: var(--muted); margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+
+  /* FUNIL */
+  .section-title { font-size: 16px; font-weight: 900; margin-bottom: 14px; color: var(--text); }
+  .funnel-card { background: var(--card); border-radius: 14px; padding: 20px; border: 1px solid var(--border); margin-bottom: 24px; }
+  .funnel-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid #f0f0f0;
+  }
+  .funnel-row:last-child { border-bottom: none; }
+  .f-num   { width: 28px; font-size: 11px; font-weight: 800; color: var(--muted); text-align: right; flex-shrink: 0; }
+  .f-name  { flex: 1; font-size: 13px; font-weight: 600; color: var(--text); }
+  .f-bar-wrap { width: 200px; flex-shrink: 0; }
+  .f-bar-track { height: 10px; background: #f0f0f0; border-radius: 5px; overflow: hidden; }
+  .f-bar-fill  { height: 100%; border-radius: 5px; transition: width .8s ease; }
+  .f-pct   { width: 42px; font-size: 12px; font-weight: 800; text-align: right; flex-shrink: 0; }
+  .f-count { width: 36px; font-size: 11px; color: var(--muted); text-align: right; flex-shrink: 0; }
+  .f-drop  { width: 52px; font-size: 11px; font-weight: 700; text-align: right; flex-shrink: 0; }
+
+  /* LEADS */
+  .leads-card { background: var(--card); border-radius: 14px; padding: 20px; border: 1px solid var(--border); margin-bottom: 24px; }
+  .leads-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .leads-table th { text-align: left; padding: 8px 10px; font-size: 11px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; border-bottom: 2px solid var(--border); }
+  .leads-table td { padding: 10px 10px; border-bottom: 1px solid #f5f5f5; }
+  .leads-table tr:last-child td { border-bottom: none; }
+  .leads-table tr:hover td { background: var(--green-bg); }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+  .badge-green { background: var(--green-bg); color: var(--green-dark); }
+
+  .empty { text-align: center; padding: 40px; color: var(--muted); font-size: 14px; }
+  .loading-msg { text-align: center; padding: 60px; color: var(--muted); font-size: 15px; }
+
+  @media (max-width: 600px) {
+    .f-bar-wrap { width: 100px; }
+    .f-drop { display: none; }
+    .topbar h1 { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div style="font-size:36px;margin-bottom:12px">🔐</div>
+    <h1>Dashboard de Tracking</h1>
+    <p>Acesso restrito · Quiz Prosperidade</p>
+    <input type="password" id="pwdInput" class="login-input" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">Entrar</button>
+    <p class="login-err" id="loginErr">Senha incorreta</p>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <div class="topbar">
+    <h1>📊 Quiz · Tracking de Funil</h1>
+    <div class="topbar-right">
+      <span class="last-update" id="lastUpdate"></span>
+      <button class="refresh-btn" onclick="loadData()">↻ Atualizar</button>
+      <button class="logout-btn" onclick="doLogout()">Sair</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div id="loadingMsg" class="loading-msg">⏳ Carregando dados...</div>
+    <div id="content" style="display:none">
+
+      <!-- RESUMO -->
+      <div class="summary-grid">
+        <div class="s-card">
+          <div class="s-card-icon">👥</div>
+          <div class="s-card-num" id="totalVisitas">—</div>
+          <div class="s-card-label">Visitantes únicos</div>
+        </div>
+        <div class="s-card">
+          <div class="s-card-icon">✅</div>
+          <div class="s-card-num" id="totalConcluiram">—</div>
+          <div class="s-card-label">Chegaram à oferta</div>
+        </div>
+        <div class="s-card">
+          <div class="s-card-icon">📧</div>
+          <div class="s-card-num" id="totalLeads">—</div>
+          <div class="s-card-label">Leads capturados</div>
+        </div>
+        <div class="s-card">
+          <div class="s-card-icon">📈</div>
+          <div class="s-card-num" id="taxaConclusao">—</div>
+          <div class="s-card-label">Taxa de conclusão</div>
+        </div>
+      </div>
+
+      <!-- FUNIL -->
+      <p class="section-title">Funil de abandono por etapa</p>
+      <div class="funnel-card">
+        <div style="display:flex;align-items:center;gap:12px;padding-bottom:8px;border-bottom:2px solid var(--border);margin-bottom:4px">
+          <div style="width:28px"></div>
+          <div style="flex:1;font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Etapa</div>
+          <div style="width:200px;font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Progresso</div>
+          <div style="width:42px;font-size:11px;font-weight:800;color:var(--muted);text-align:right">%</div>
+          <div style="width:36px;font-size:11px;font-weight:800;color:var(--muted);text-align:right">Qtd</div>
+          <div style="width:52px;font-size:11px;font-weight:800;color:var(--muted);text-align:right">Saída</div>
+        </div>
+        <div id="funnelRows"></div>
+      </div>
+
+      <!-- LEADS -->
+      <p class="section-title">Últimos leads capturados</p>
+      <div class="leads-card">
+        <div id="leadsTable"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const SENHA = 'prosperidade2025'
+const SUPABASE_URL = 'https://shjatusmztpijaxozhrd.supabase.co'
+const SUPABASE_KEY = 'sb_publishable_SQtRju628XGgL9u8SKwXMQ_Z6NAGE5N'
+const _sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+
+const ETAPAS = [
+  {n:1,    nome:'Perfil inicial — esforço vs. perde dinheiro'},
+  {n:2,    nome:'Já buscou solução? (multi)'},
+  {n:3,    nome:'Próxima fase financeira'},
+  {n:4,    nome:'Padrões financeiros (multi)'},
+  {n:5,    nome:'Emoção com dinheiro'},
+  {n:6,    nome:'Relação passada com dinheiro'},
+  {n:7,    nome:'Oportunidades de ganhar mais'},
+  {n:8,    nome:'Precisa de aprovação?'},
+  {n:9,    nome:'Aceitação da estagnação (12 meses)'},
+  {n:10,   nome:'Texto do programa + gráfico de barras'},
+  {n:11,   nome:'Situação dolorosa em silêncio'},
+  {n:12,   nome:'Noites de sono'},
+  {n:13,   nome:'Gauge de prosperidade 0–10'},
+  {n:14,   nome:'Qual é o seu nome?'},
+  {n:'14b',nome:'Gráfico de alinhamento financeiro'},
+  {n:15,   nome:'📧 Informou o e-mail'},
+  {n:16,   nome:'Tempo disponível por dia'},
+  {n:17,   nome:'Loader — criando plano'},
+  {n:18,   nome:'Plano pronto 🎉'},
+  {n:19,   nome:'Depoimentos'},
+  {n:20,   nome:'🛒 Página de oferta'},
+]
+
+function doLogin() {
+  const v = document.getElementById('pwdInput').value
+  if (v === SENHA) {
+    document.getElementById('loginScreen').style.display = 'none'
+    document.getElementById('dashboard').style.display = 'block'
+    loadData()
+  } else {
+    document.getElementById('loginErr').style.display = 'block'
+    document.getElementById('pwdInput').value = ''
+  }
+}
+
+function doLogout() {
+  document.getElementById('dashboard').style.display = 'none'
+  document.getElementById('loginScreen').style.display = 'flex'
+  document.getElementById('pwdInput').value = ''
+}
+
+async function loadData() {
+  document.getElementById('loadingMsg').style.display = 'block'
+  document.getElementById('content').style.display = 'none'
+
+  const { data: eventos } = await _sb
+    .from('eventos')
+    .select('session_id, etapa, etapa_nome, created_at')
+    .order('created_at', { ascending: false })
+    .limit(5000)
+
+  const { data: leads } = await _sb
+    .from('leads')
+    .select('nome, email, created_at')
+    .order('created_at', { ascending: false })
+    .limit(50)
+
+  if (!eventos) return
+
+  const sessPorEtapa = {}
+  const todasSessoes = new Set()
+  eventos.forEach(e => {
+    todasSessoes.add(e.session_id)
+    const k = String(e.etapa)
+    if (!sessPorEtapa[k]) sessPorEtapa[k] = new Set()
+    sessPorEtapa[k].add(e.session_id)
+  })
+
+  const totalVisitas = todasSessoes.size
+  const totalOferta  = (sessPorEtapa['20'] || new Set()).size
+  const totalLeads   = leads ? leads.length : 0
+  const taxaConc     = totalVisitas > 0 ? Math.round((totalOferta/totalVisitas)*100) : 0
+
+  document.getElementById('totalVisitas').textContent    = totalVisitas
+  document.getElementById('totalConcluiram').textContent = totalOferta
+  document.getElementById('totalLeads').textContent      = totalLeads
+  document.getElementById('taxaConclusao').textContent   = taxaConc + '%'
+
+  const maxCount = totalVisitas || 1
+  let html = ''
+  for (let i = 0; i < ETAPAS.length; i++) {
+    const et = ETAPAS[i]
+    const key = String(et.n)
+    const count = (sessPorEtapa[key] || new Set()).size
+    const pct   = Math.round((count / maxCount) * 100)
+
+    let dropHtml = ''
+    if (i < ETAPAS.length - 1) {
+      const nextKey   = String(ETAPAS[i+1].n)
+      const nextCount = (sessPorEtapa[nextKey] || new Set()).size
+      if (count > 0 && nextCount < count) {
+        const drop = count - nextCount
+        const dropPct = Math.round((drop / count) * 100)
+        const color = dropPct > 40 ? '#e03030' : dropPct > 20 ? '#e07800' : '#888'
+        dropHtml = `<span style="color:${color}">-${dropPct}%</span>`
+      } else {
+        dropHtml = `<span style="color:#ccc">—</span>`
+      }
+    }
+
+    const barColor = pct > 70 ? '#1a7a3a' : pct > 40 ? '#e07800' : '#e03030'
+
+    html += `
+      <div class="funnel-row">
+        <div class="f-num">${et.n}</div>
+        <div class="f-name">${et.nome}</div>
+        <div class="f-bar-wrap">
+          <div class="f-bar-track">
+            <div class="f-bar-fill" style="width:${pct}%;background:${barColor}"></div>
+          </div>
+        </div>
+        <div class="f-pct" style="color:${barColor}">${pct}%</div>
+        <div class="f-count">${count}</div>
+        <div class="f-drop">${dropHtml}</div>
+      </div>`
+  }
+  document.getElementById('funnelRows').innerHTML = html || '<div class="empty">Nenhum dado ainda</div>'
+
+  if (leads && leads.length > 0) {
+    let tbl = `<table class="leads-table">
+      <thead><tr>
+        <th>Nome</th><th>E-mail</th><th>Data</th>
+      </tr></thead><tbody>`
+    leads.forEach(l => {
+      const dt = new Date(l.created_at)
+      const dtStr = dt.toLocaleDateString('pt-BR') + ' ' + dt.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'})
+      tbl += `<tr>
+        <td>${l.nome || '<span style="color:#bbb">—</span>'}</td>
+        <td><span class="badge badge-green">${l.email}</span></td>
+        <td style="color:var(--muted);font-size:12px">${dtStr}</td>
+      </tr>`
+    })
+    tbl += '</tbody></table>'
+    document.getElementById('leadsTable').innerHTML = tbl
+  } else {
+    document.getElementById('leadsTable').innerHTML = '<div class="empty">Nenhum lead capturado ainda</div>'
+  }
+
+  const now = new Date()
+  document.getElementById('lastUpdate').textContent =
+    'Atualizado às ' + now.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'})
+
+  document.getElementById('loadingMsg').style.display = 'none'
+  document.getElementById('content').style.display = 'block'
+}
+
+document.getElementById('pwdInput').focus()
+</script>
+</body>
+</html>
